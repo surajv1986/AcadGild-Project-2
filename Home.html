@@ -5,17 +5,24 @@
     <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css"></link>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/ng-template" id="customTemplate.html">
+    <a>
+      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+    </a>
+    </script>
     
 	<title>Home Page</title>
 </head>
 <body ng-app="RideApp">
-<div class="col-md-4" ng-controller="SearchCtrl">
+<div class="col-md-4" ng-controller="TypeaheadCtrl">
 <label>Enter Your Apartment Name:</label>
+<br/>
 <input type="text" name="txtApartment"></input>
 <br/>
-<label>Enter your destination:</label>
-<input type="search" name="txtDestination"></input>
-
+<label>Enter Your Location:</label>
+    <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
+    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 <br/>
 <button id="Search">Search Your Ride</button>
 </div>
@@ -35,12 +42,7 @@
    </style>
     <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
 
-    <h4>Inline</h4>
-    <div style="display:inline-block; min-height:290px;">
-      <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></datepicker>
-    </div>
-
-    <h4>Popup</h4>
+    <h4>Pick the date for your Ride</h4>
     <div class="row">
         <div class="col-md-6">
             <p class="input-group">
@@ -51,30 +53,27 @@
             </p>
         </div>
 
-        <div class="col-md-6">
-            <p class="input-group">
-              <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="opened" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label>Format:</label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select>
-        </div>
-    </div>
+    
+    
+   </style>
+   </div>
 
-    <hr />
-    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="dt = '2009-08-24'">2009-08-24</button>
-    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" tooltip="After today restriction">Min date</button>
+   
 </div>
+</div>
+<div class="col-md-3">
+ <div ng-controller="TimepickerCtrl">
+ <pre class="alert alert-info">Selected Time is: {{mytime | date:'shortTime' }}</pre>
+  <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian">
+  </timepicker>
+
+
+ </div>
 </div>
 </body>
 <script src="/Application/App.js"></script>
 <script src="/Application/SearchCtrl.js"></script>
 <script src="/Application/DateTimeCtrl.js"></script>
+<script src="/Application/TypeAheadCtrl.js"></script>
+<script src="/Application/TimerCtrl.js"></script>
 </html>
