@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css"></link>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/ng-template" id="customTemplate.html">
+    <a>
+      <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+    </a>
+    </script>
+    
+	<title>Home Page</title>
+</head>
+<body ng-app="RideApp" background="/Images/car-background-images-19.jpg" >
+<div class="Main" ui-view="">
+</div>
+</body>
+<script src="/Application/App.js"></script>
+<script src="/Application/SearchCtrl.js"></script>
+<script src="/Application/DateTimeCtrl.js"></script>
+<script src="/Application/TypeAheadCtrl.js"></script>
+<script src="/Application/TimerCtrl.js"></script>
+<link rel="stylesheet" href="/CSS/Home.css"></link>
+</html>
