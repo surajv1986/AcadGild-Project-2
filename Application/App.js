@@ -1,5 +1,6 @@
-angular.module('RideApp',['ui.bootstrap','ui.router'])
-.config(['$stateProvider, $urlRouterProvider', function($stateProvider, $urlRouterProvider){
+var myRideApp=angular.module('RideApp',['ui.bootstrap','ui.router']);
+
+myRideApp.config( function($stateProvider, $urlRouterProvider){
 
    $stateProvider
     .state('Home', {
@@ -13,11 +14,11 @@ angular.module('RideApp',['ui.bootstrap','ui.router'])
       url: "/Dashboard.html",
       templateUrl: "partials/Dashboard.html"
     })
+   
+   $urlRouterProvider.otherwise('/Home');
 
-    $stateProvider.otherwise('/Home');
-
- }
-]);
+  }
+);
 
 
 
