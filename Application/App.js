@@ -5,14 +5,14 @@ myRideApp.config( function($stateProvider, $urlRouterProvider){
    $stateProvider
     .state('Home', {
       url: "/Home",
-      templateUrl: "partials/Home.html",
+      templateUrl: "Partials/Home.html",
       controller:"SearchCtrl"
     })
 
     $stateProvider
-    .state('Dashboard.html', {
-      url: "/Dashboard.html",
-      templateUrl: "partials/Dashboard.html"
+    .state('Dashboard', {
+      url: "/Dashboard",
+      templateUrl: "Partials/Dashboard.html"
     })
    
    $urlRouterProvider.otherwise('/Home');
